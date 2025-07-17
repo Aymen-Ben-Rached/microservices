@@ -49,7 +49,7 @@ public class StockClient {
     }
 
     public void fallbackDecrement(String stockId, int newQuantity, Throwable throwable) {
-        log.warn("⚠️ Fallback for decrementStockQuantity for stock ID {}: {}",
+        log.warn("Fallback for decrementStockQuantity for stock ID {}: {}",
                 stockId, throwable.getMessage());
     }
 
