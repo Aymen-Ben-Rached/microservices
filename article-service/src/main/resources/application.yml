@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: article-service
   datasource:
     url: jdbc:postgresql://localhost:5432/articledb
     username: postgres
@@ -29,5 +31,9 @@ management:
       exposure:
         include: resilience4j.circuitbreakers,health
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 
 

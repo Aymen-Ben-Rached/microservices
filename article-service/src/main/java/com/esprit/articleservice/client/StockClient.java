@@ -21,7 +21,7 @@ public class StockClient {
     public StockDto getStockByArticleName(String articleName) {
         return webClientBuilder.build()
                 .get()
-                .uri("http://localhost:8082/stocks/article/{name}", articleName)
+                .uri("http://stock-service/stocks/article/{name}", articleName)
                 .retrieve()
                 .bodyToMono(StockDto.class)
                 .block();
@@ -38,7 +38,7 @@ public class StockClient {
         try {
             webClientBuilder.build()
                     .patch()
-                    .uri("http://localhost:8082/stocks/{id}", stockId)
+                    .uri("http://stock-service/stocks/{id}", stockId)
                     .bodyValue(updateFields)
                     .retrieve()
                     .bodyToMono(Void.class)
