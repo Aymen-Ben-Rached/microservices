@@ -11,3 +11,23 @@ spring:
 
 server:
   port: 8081
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      stock:
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 2
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 2
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: resilience4j.circuitbreakers,health
+
+
+
