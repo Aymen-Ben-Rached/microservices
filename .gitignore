@@ -1,0 +1,36 @@
+# ========== Java build artifacts ==========
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven and Gradle directories
+target/
+build/
+
+# ========== IntelliJ IDEA ==========
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Optional: exclude specific IDEA files if you don't want to ignore entire .idea folder
+.idea/compiler.xml
+.idea/vcs.xml
+.idea/workspace.xml
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# ========== Shared Lib Artifacts ==========
+**/shared-library-*.jar
+
+# ========== Temporary files ==========
+*.tmp
+*.bak
+*.swp
