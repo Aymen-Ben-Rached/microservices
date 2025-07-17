@@ -1,0 +1,3 @@
+com\esprit\shared\dto\StockDto.class
+com\esprit\shared\dto\ArticleDto.class
+com\esprit\shared\exception\NotFoundException.class
