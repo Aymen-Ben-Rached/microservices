@@ -29,21 +29,20 @@ public class StockServiceImpl implements IStockService {
     }
 
     @Override
-    public StockDto update(String id, Map<Object, Object> fields) {
+    public StockDto update(String id, Map<String, Integer> fields) {
         Stock stock = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Stock not found"));
 
-        fields.forEach((k, v) -> {
-            Field field = ReflectionUtils.findField(Stock.class, (String) k);
-            if (field != null) {
-                field.setAccessible(true);
-                ReflectionUtils.setField(field, stock, v);
+        fields.forEach((field, value) -> {
+            if ("quantity".equals(field)) {
+                stock.setQuantity(value);
             }
         });
 
         stock.setUpdatedAt(LocalDateTime.now());
         return mapper.toDto(repository.save(stock));
     }
+
 
     @Override
     public boolean delete(String id) {
@@ -53,7 +52,8 @@ public class StockServiceImpl implements IStockService {
 
     @Override
     public Page<StockDto> getStocks(int page, int size) {
-        return repository.findAll(PageRequest.of(page, size)).map(mapper::toDto);
+        return repository.findAll(PageRequest.of(page, size))
+                .map(mapper::toDto);
     }
 
     @Override

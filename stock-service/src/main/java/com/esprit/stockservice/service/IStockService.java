@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface IStockService {
     StockDto add(StockDto dto);
-    StockDto update(String id, Map<Object, Object> fields);
+    StockDto update(String id, Map<String, Integer> fields);
     boolean delete(String id);
     Page<StockDto> getStocks(int page, int size);
     StockDto getStock(String id);
