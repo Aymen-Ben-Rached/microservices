@@ -1,0 +1,54 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: article-service
+          uri: lb://article-service
+          predicates:
+            - Path=/articles/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: articleCircuitBreaker
+                fallbackUri: forward:/fallback/article
+        - id: stock-service
+          uri: lb://stock-service
+          predicates:
+            - Path=/stocks/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: stockCircuitBreaker
+                fallbackUri: forward:/fallback/stock
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      articleCircuitBreaker:
+        registerHealthIndicator: true
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 5s
+      stockCircuitBreaker:
+        registerHealthIndicator: true
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 5s
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

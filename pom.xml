@@ -10,6 +10,7 @@
     <packaging>pom</packaging>        <!-- 👈 IMPORTANT: plain POM -->
 
     <modules>
+        <module>api-gateway</module>
         <module>article-service</module>
         <module>discovery-server</module>
         <module>stock-service</module>
