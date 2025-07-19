@@ -7,11 +7,13 @@ import com.esprit.articleservice.mapper.ArticleMapper;
 import com.esprit.articleservice.repository.ArticleRepository;
 import com.esprit.shared.dto.ArticleDto;
 import com.esprit.shared.dto.StockDto;
+import com.esprit.shared.events.StockUpdatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 

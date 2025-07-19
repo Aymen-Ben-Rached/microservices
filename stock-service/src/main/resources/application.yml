@@ -7,3 +7,19 @@ spring:
       uri: mongodb://localhost:27017/stockdb
   application:
     name: stock-service
+  kafka:
+    bootstrap-servers: localhost:29092  # Must match your Docker-exposed port
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add-type-headers: true  # Critical for message deserialization
+        acks: all  # Ensure message durability
+        retries: 3  # Auto-retry failed sends
+        linger.ms: 5  # Improve throughput
+
+  # Optional but recommended
+logging:
+  level:
+    org.springframework.kafka: DEBUG
+    org.apache.kafka.clients.producer: INFO

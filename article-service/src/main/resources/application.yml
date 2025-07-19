@@ -12,6 +12,21 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    bootstrap-servers: localhost:29092  # Critical change for host access
+    consumer:
+      group-id: article-service-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.esprit.shared.events"
+        spring.json.value.default.type: "com.esprit.shared.events.StockUpdatedEvent"
+        session.timeout.ms: 25000  # Increased timeouts
+        request.timeout.ms: 30000
+    listener:
+      missing-topics-fatal: false  # Allows startup without topic existing
+      ack-mode: manual_immediate
 
 server:
   port: 8081
