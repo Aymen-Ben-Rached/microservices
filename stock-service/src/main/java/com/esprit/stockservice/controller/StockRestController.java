@@ -21,7 +21,7 @@ public class StockRestController {
         return ResponseEntity.ok(service.add(stockDto));
     }
 
-    @PostMapping("/{id}/update-quantity")
+    @PatchMapping("/{id}/update-quantity")
     public ResponseEntity<StockDto> updateStockQuantity(
             @PathVariable String id,
             @RequestBody Map<String, Integer> updateFields) {
